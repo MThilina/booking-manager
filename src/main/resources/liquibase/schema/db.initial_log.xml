@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <property name="u_id" value="uuid()" dbms="mysql"/>
+<!--This table has the basic structure to contain data. Database normalization  been done-->
+    <changeSet id="create_table_book_data" author="thilinam">
+        <createTable tableName="book_data">
+            <column name="id" type="varchar(50)" valueComputed="${u_id}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="isbn" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="created_time" type="VARCHAR(255)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="create_table_book_data"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create_table_borrower" author="thilinam">
+        <createTable tableName="borrower_data">
+            <column name="id" type="varchar(50)" valueComputed="${u_id}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="created_time" type="VARCHAR(255)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="create_table_borrower"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create_user_data" author="thilinam">
+        <createTable tableName="user_data">
+            <column name="id" type="varchar(50)" valueComputed="${u_id}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="created_time" type="VARCHAR(255)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="create_user_data"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create_user_roles" author="thilinam">
+        <createTable tableName="user_roles">
+            <column name="id" type="varchar(50)" valueComputed="${u_id}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column  name="created_time" type="VARCHAR(255)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_role"
+                                 referencedTableName="user_data"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropTable tableName="create_user_roles"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create_borrow_book" author="thilinam">
+        <createTable tableName="book_borrow_data">
+            <column name="id" type="varchar(50)" valueComputed="${u_id}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="borrower_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="borrow_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="return_date" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="book_borrow_data"
+                                 baseColumnNames="borrower_id"
+                                 constraintName="fk_borrower_id"
+                                 referencedTableName="borrower_data"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="book_borrow_data"
+                                 baseColumnNames="book_id"
+                                 constraintName="fk_book_id"
+                                 referencedTableName="book_data"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropTable tableName="create_user_details"/>
+        </rollback>
+    </changeSet>
+    <!--Creating Indexes -->
+    <changeSet id="idx_book_detail" author="thilinam">
+        <createIndex tableName="book_data" indexName="idx_book">
+            <column name="isbn"/>
+            <column name="author"/>
+            <column name="title"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="idx_borrower_detail" author="thilinam">
+        <createIndex tableName="borrower_data" indexName="idx_borrower">
+            <column name="name"/>
+            <column name="email"/>
+        </createIndex>
+    </changeSet>
+
+
+    <changeSet id="idx_user_data_detail" author="thilinam">
+        <createIndex tableName="user_data" indexName="idx_user">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+
+
+</databaseChangeLog>
+

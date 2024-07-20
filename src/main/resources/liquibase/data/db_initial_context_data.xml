@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Changeset for inserting data into user_roles table -->
+    <changeSet id="context_user_roles" author="thilinam">
+        <sql>
+            INSERT INTO user_roles (id, user_id, role, Created_Time) VALUES
+            ('4d4d5d8a-8d4d-4f4d-8d4d-7e7b8d7a9d5a', '1f1a4a9b-7b1a-4d44-9a2a-7c6b8a7a9c2a', 'ROLE_ADMIN', '2024-01-14 23:00:00'),
+            ('5e5e6e9a-9e5e-4g5e-9e5e-8f8b9e8a9e6a', '2d2b4b6a-8c2b-4c4d-9b2a-7d5b9a6a9b3a', 'ROLE_USER', '2024-01-15 00:00:00'),
+            ('6f6f7f9a-8f6f-4h6f-8f6f-7g7b8f8a9f7a', '3c3c4c8a-9c3c-4e4f-9c3c-8e6b8c7a9c4a', 'ROLE_USER', '2024-01-16 01:00:00');
+        </sql>
+    </changeSet>
+
+    <!-- Changeset for inserting data into book_borrow_data table -->
+    <changeSet id="context_book_borrow_data" author="thilinam">
+        <sql>
+            INSERT INTO book_borrow_data (id, borrower_id, book_id, borrow_date, return_date) VALUES
+            ('7a7a8a9a-7a7a-4i7a-7a7a-8h8b9a8a9a8a', '6adf80a7-8c3d-4b8c-944d-66f91dfdf8d6', '1e9d55f7-bb2e-4e25-8c3b-0b6472a6f7dd', '2024-01-01', '2024-01-15'),
+            ('8b8b9b9b-8b8b-4j8b-8b8b-9i9b9b9b9b9b', '7c8e805e-9a7d-4f4b-a8c8-5e7f77d8eac1', '2f72f240-8c3a-4f43-a5a4-622cf40c7c71', '2024-02-01', '2024-02-15'),
+            ('9c9c0c0c-9c9c-4k9c-9c9c-0j0c0c0c0c0c', '8e472dfb-7c2d-48b8-8c23-789f2a8c7c81', '3a9df50e-9127-4d44-a3c2-5a4e1b779c3a', '2024-03-01', '2024-03-15'),
+            ('0d0d1d1d-0d0d-4l0d-0d0d-1k1d1d1d1d1d', '9fd67e6f-8b2c-4a2a-8e33-6c4f7c68f4f9', '4bd746f4-7289-4f4c-9e9d-30c4ef92c08f', '2024-04-01', '2024-04-15'),
+            ('1e1e2e2e-1e1e-4m1e-1e1e-2l2e2e2e2e2e', '0ac71e5b-4a5b-4a9c-9d4e-7c5f8c1e6a61', '5cf26c07-1c5b-4f64-9a94-6f54598a7a97', '2024-05-01', '2024-05-15'),
+            ('2f2f3f3f-2f2f-4n2f-2f2f-3m3f3f3f3f3f', '6adf80a7-8c3d-4b8c-944d-66f91dfdf8d6', '1e9d55f7-bb2e-4e25-8c3b-0b6472a6f7dd', '2024-06-01', '2024-06-15'),
+            ('3g3g4g4g-3g3g-4o3g-3g3g-4n4g4g4g4g4g', '7c8e805e-9a7d-4f4b-a8c8-5e7f77d8eac1', '2f72f240-8c3a-4f43-a5a4-622cf40c7c71', '2024-07-01', '2024-07-15'),
+            ('4h4h5h5h-4h4h-4p4h-4h4h-5o5h5h5h5h5h', '8e472dfb-7c2d-48b8-8c23-789f2a8c7c81', '3a9df50e-9127-4d44-a3c2-5a4e1b779c3a', '2024-08-01', '2024-08-15'),
+            ('5i5i6i6i-5i5i-4q5i-5i5i-6p6i6i6i6i6i', '9fd67e6f-8b2c-4a2a-8e33-6c4f7c68f4f9', '4bd746f4-7289-4f4c-9e9d-30c4ef92c08f', '2024-09-01', '2024-09-15'),
+            ('6j6j7j7j-6j6j-4r6j-6j6j-7q7j7j7j7j7j', '0ac71e5b-4a5b-4a9c-9d4e-7c5f8c1e6a61', '5cf26c07-1c5b-4f64-9a94-6f54598a7a97', '2024-10-01', '2024-10-15'),
+            ('7k7k8k8k-7k7k-4s7k-7k7k-8r8k8k8k8k8k', '6adf80a7-8c3d-4b8c-944d-66f91dfdf8d6', '1e9d55f7-bb2e-4e25-8c3b-0b6472a6f7dd', '2024-11-01', '2024-11-15'),
+            ('8l8l9l9l-8l8l-4t8l-8l8l-9s9l9l9l9l9l', '7c8e805e-9a7d-4f4b-a8c8-5e7f77d8eac1', '2f72f240-8c3a-4f43-a5a4-622cf40c7c71', '2024-12-01', '2024-12-15'),
+            ('9m9m0m0m-9m9m-4u9m-9m9m-0t0m0m0m0m0m', '8e472dfb-7c2d-48b8-8c23-789f2a8c7c81', '3a9df50e-9127-4d44-a3c2-5a4e1b779c3a', '2025-01-01', '2025-01-15'),
+            ('0n0n1n1n-0n0n-4v0n-0n0n-1u1n1n1n1n1n', '9fd67e6f-8b2c-4a2a-8e33-6c4f7c68f4f9', '4bd746f4-7289-4f4c-9e9d-30c4ef92c08f', '2025-02-01', '2025-02-15'),
+            ('1o1o2o2o-1o1o-4w1o-1o1o-2v2o2o2o2o2o', '0ac71e5b-4a5b-4a9c-9d4e-7c5f8c1e6a61', '5cf26c07-1c5b-4f64-9a94-6f54598a7a97', '2025-03-01', '2025-03-15');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

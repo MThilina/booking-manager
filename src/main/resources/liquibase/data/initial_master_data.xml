@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Changeset for inserting data into book_data table -->
+    <changeSet id="master_book" author="thilinam">
+        <sql>
+            INSERT INTO book_data (id, isbn, title, author, Created_Time) VALUES
+            ('1e9d55f7-bb2e-4e25-8c3b-0b6472a6f7dd', '978-3-16-148410-0', 'Effective Java', 'Joshua Bloch', '2024-01-01 10:00:00'),
+            ('2f72f240-8c3a-4f43-a5a4-622cf40c7c71', '978-0-13-468599-1', 'Clean Code', 'Robert C. Martin', '2024-01-02 11:00:00'),
+            ('3a9df50e-9127-4d44-a3c2-5a4e1b779c3a', '978-0-596-52068-7', 'Design Patterns', 'Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', '2024-01-03 12:00:00'),
+            ('4bd746f4-7289-4f4c-9e9d-30c4ef92c08f', '978-1-491-95630-2', 'Microservices Patterns', 'Chris Richardson', '2024-01-04 13:00:00'),
+            ('5cf26c07-1c5b-4f64-9a94-6f54598a7a97', '978-1-61729-398-6', 'Spring in Action', 'Craig Walls', '2024-01-05 14:00:00');
+        </sql>
+    </changeSet>
+
+    <!-- Changeset for inserting data into borrower_data table -->
+    <changeSet id="master_borrower" author="thilinam">
+        <sql>
+            INSERT INTO borrower_data (id, name, email, Created_Time) VALUES
+            ('6adf80a7-8c3d-4b8c-944d-66f91dfdf8d6', 'Alice Johnson', 'alice.johnson@example.com', '2024-01-06 15:00:00'),
+            ('7c8e805e-9a7d-4f4b-a8c8-5e7f77d8eac1', 'Bob Smith', 'bob.smith@example.com', '2024-01-07 16:00:00'),
+            ('8e472dfb-7c2d-48b8-8c23-789f2a8c7c81', 'Carol Williams', 'carol.williams@example.com', '2024-01-08 17:00:00'),
+            ('9fd67e6f-8b2c-4a2a-8e33-6c4f7c68f4f9', 'David Brown', 'david.brown@example.com', '2024-01-09 18:00:00'),
+            ('0ac71e5b-4a5b-4a9c-9d4e-7c5f8c1e6a61', 'Eve Davis', 'eve.davis@example.com', '2024-01-10 19:00:00');
+        </sql>
+    </changeSet>
+
+    <!-- Changeset for inserting data into user_data table -->
+    <changeSet id="master_user" author="thilinam">
+        <sql>
+            INSERT INTO user_data (id, name, password, Created_Time) VALUES
+            ('1f1a4a9b-7b1a-4d44-9a2a-7c6b8a7a9c2a', 'Admin', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-11 20:00:00'),
+            ('2d2b4b6a-8c2b-4c4d-9b2a-7d5b9a6a9b3a', 'User1', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-12 21:00:00'),
+            ('3c3c4c8a-9c3c-4e4f-9c3c-8e6b8c7a9c4a', 'User2', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-13 22:00:00');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
