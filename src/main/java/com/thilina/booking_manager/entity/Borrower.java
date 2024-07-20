@@ -2,12 +2,14 @@ package com.thilina.booking_manager.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "borrower_data")
 public class Borrower {
 

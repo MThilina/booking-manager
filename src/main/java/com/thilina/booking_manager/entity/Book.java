@@ -7,6 +7,7 @@ import org.hibernate.annotations.SourceType;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "book_data")
 public class Book {
 

@@ -11,7 +11,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "book_borrow_data")
 public class BookRecord {
@@ -28,10 +27,12 @@ public class BookRecord {
     private Book bookId;
 
     @CreationTimestamp(source = SourceType.DB)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "borrow_date",nullable = false)
     private String bookBorrowDate;
 
     @UpdateTimestamp(source = SourceType.DB)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "return_date",nullable = false)
     private String bookReturnDate;
 }

@@ -10,7 +10,6 @@ import org.hibernate.annotations.SourceType;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "user_data")
 public class User {
