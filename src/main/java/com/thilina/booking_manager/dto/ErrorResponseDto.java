@@ -12,6 +12,6 @@ import java.time.Instant;
 public class ErrorResponseDto {
     private String message;
     private Integer status;
-    private String developer_error_code;
+    private Instant time;
 
 }
