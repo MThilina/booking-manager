@@ -1,13 +1,11 @@
 package com.thilina.booking_manager.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.CascadeType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SourceType;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
 @Getter
 @Setter
@@ -31,8 +29,8 @@ public class BookRecord {
     @Column(name = "borrow_date",nullable = false)
     private String bookBorrowDate;
 
-    @UpdateTimestamp(source = SourceType.DB)
+
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "return_date",nullable = false)
+    @Column(name = "return_date")
     private String bookReturnDate;
 }
