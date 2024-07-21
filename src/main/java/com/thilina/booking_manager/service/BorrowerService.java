@@ -52,7 +52,8 @@ public class BorrowerService {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new NotfoundException("Book not found"));
 
-        Optional<BookRecord> optionalRecord = recordRepository.findByBookIdAndBookBorrowDateIsNotNullAndBookReturnDateIsNull(book);
+        Optional<BookRecord> optionalRecord = recordRepository
+                .findByBookIdAndBookBorrowDateIsNotNullAndBookReturnDateIsNull(book);
 
         BookRecord record;
         if (optionalRecord.isPresent()) {
@@ -89,7 +90,7 @@ public class BorrowerService {
         BookRecord record;
         record = optionalRecord.get();
         if (record.getBookBorrowDate() != null && record.getBookReturnDate() != null) {
-            throw new BookNotReturnedException("Book has been return already ");
+            throw new BookNotReturnedException("Book has been returned already");
         }
         record.setBookReturnDate(Timestamp.from(Instant.now()).toString());
         // else books can be borrowed
