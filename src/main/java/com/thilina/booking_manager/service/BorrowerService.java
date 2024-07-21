@@ -6,10 +6,7 @@ import com.thilina.booking_manager.dto.BorrowerDto;
 import com.thilina.booking_manager.entity.Book;
 import com.thilina.booking_manager.entity.BookRecord;
 import com.thilina.booking_manager.entity.Borrower;
-import com.thilina.booking_manager.exception.BadRequestException;
-import com.thilina.booking_manager.exception.BookNotReturnedException;
-import com.thilina.booking_manager.exception.BookRecordNotFoundException;
-import com.thilina.booking_manager.exception.NotfoundException;
+import com.thilina.booking_manager.exception.*;
 import com.thilina.booking_manager.mappers.BookMapper;
 import com.thilina.booking_manager.mappers.BorrowerMapper;
 import com.thilina.booking_manager.repository.BookRecordRepository;
@@ -43,25 +40,41 @@ public class BorrowerService {
     }
 
     public BookDto borrowBook(String borrowerId, String bookId) {
-        // validate user and book
-        Book book = CommonValidation(borrowerId, bookId);
+        // Validate user and book
+        Borrower borrower = borrowerRepository.findById(borrowerId)
+                .orElseThrow(() -> new NotfoundException("Borrower not found"));
 
-        Optional<BookRecord> optionalRecord = recordRepository.findById(book.getId());
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new NotfoundException("Book not found"));
 
-        BookRecord record = optionalRecord.orElseThrow(() -> new BookRecordNotFoundException("Book distribution details cannot found."));
+        Optional<BookRecord> optionalRecord = recordRepository.findByBookIdAndBookBorrowDateIsNotNullAndBookReturnDateIsNull(book);
 
-        if (record.getBookBorrowDate() != null && record.getBookReturnDate() == null) {
-            throw new BookNotReturnedException("Book hasn't been returned yet");
-        }else{
-            // else books can be borrowed
-            recordRepository.save(record);
+        BookRecord record;
+        if (optionalRecord.isPresent()) {
+            record = optionalRecord.get();
+
+            // If the record exists, check the borrow and return dates
+            this.validateBookRecord(record);
+        } else {
+            // Create a new BookRecord if it doesn't exist
+            record = this.createNewBookRecord(book, borrower);
         }
+
+        // Set the default return date and save the record
+        record.setBookReturnDate(null); // Assuming the book is now being borrowed, so reset return date
+        recordRepository.save(record);
+
         return BookMapper.INSTANCE.toDTO(book);
     }
 
 
     public BookDto returnBook(String borrowerId, String bookId) {
-        Book book = CommonValidation(borrowerId, bookId);
+        Borrower borrower = borrowerRepository.findById(borrowerId)
+                .orElseThrow(() -> new NotfoundException("Borrower not found"));
+
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new NotfoundException("Book not found"));
+
 
         Optional<BookRecord> optionalRecord = recordRepository.findById(book.getId());
 
@@ -69,7 +82,7 @@ public class BorrowerService {
 
         if (record.getBookBorrowDate() != null && record.getBookReturnDate() != null) {
             throw new BookNotReturnedException("Book has been return already ");
-        }else{
+        } else {
             // else books can be borrowed
             record.getBookReturnDate();
             recordRepository.save(record);
@@ -78,13 +91,23 @@ public class BorrowerService {
         return BookMapper.INSTANCE.toDTO(book);
     }
 
+    /******************************** Private Methods *************************************************/
 
-    private Book CommonValidation(String borrowerId, String bookId) {
-        Borrower borrower = borrowerRepository.findById(borrowerId)
-                .orElseThrow(() -> new NotfoundException("Borrower not found"));
+    private void validateBookRecord(BookRecord record) {
+        if (record.getBookBorrowDate() != null && record.getBookReturnDate() == null) {
+            throw new BookNotReturnedException("Book hasn't been returned yet");
+        }
 
-        Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new NotfoundException("Book not found"));
-        return book;
+        if (record.getBookBorrowDate() == null && record.getBookReturnDate() != null) {
+            throw new DataCurruptedException("Book return date is corrupted");
+        }
     }
+
+    private BookRecord createNewBookRecord(Book book, Borrower borrower) {
+        BookRecord record = new BookRecord();
+        record.setBookId(book);
+        record.setBorrowerId(borrower);
+        return record;
+    }
+
 }
