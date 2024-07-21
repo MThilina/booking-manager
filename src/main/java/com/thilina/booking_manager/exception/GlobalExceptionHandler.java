@@ -30,4 +30,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BookNotReturnedException.class)
+    protected ResponseEntity<ErrorResponseDto> handleBookNotReturnedException(BookNotReturnedException ex) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto(ex.getMessage(),HttpStatus.NOT_FOUND.value(), Instant.now());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DataCurruptedException.class)
+    protected ResponseEntity<ErrorResponseDto> handleDataCorruptException(DataCurruptedException ex) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto(ex.getMessage(),HttpStatus.NOT_FOUND.value(), Instant.now());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
 }
