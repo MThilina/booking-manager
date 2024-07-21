@@ -9,6 +9,8 @@ COPY target/booking-management.jar booking-management.jar
 
 # Expose the port that the application will run on
 EXPOSE 8080
+EXPOSE 1500
+EXPOSE 3306
 
 # Command to run the JAR file
-ENTRYPOINT ["java", "-jar", "booking-management"]
+ENTRYPOINT ["java", "-jar", "booking-management.jar"]
