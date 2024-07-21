@@ -14,7 +14,7 @@ import com.thilina.booking_manager.repository.BookRepository;
 import com.thilina.booking_manager.repository.BorrowerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
+
 
 import java.sql.Timestamp;
 import java.time.Instant;
