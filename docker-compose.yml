@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_DATABASE: booking_manager
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1qaz@WSX3edc
+    ports:
+      - 1500:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql  # Mount the volume for database data persistence
+      - ./init.sql:/docker-entrypoint-initdb.d/initdb/init.sql:ro # Ensure correct volume mapping
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-network
+
+  app:
+    build: .
+    container_name: spring_app_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATA_SOURCE_NAME: booking_manager
+      SPRING_DATA_SOURCE_URL: jdbc:mysql://mysql_container:3306/SPRING_DATA_SOURCE_NAME?createDatabaseIfNotExist=true
+      SPRING_DATA_SOURCE_PASSWORD: 1qaz@WSX3edc
+    volumes:
+      - .:/app
+      - logs:/app/logs
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+  logs:
+
+networks:
+  app-network:
