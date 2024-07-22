@@ -13,7 +13,7 @@ jobs:
       mysql:
         image: mysql
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: 1qaz@WSX3edc
           MYSQL_DATABASE: booking_manager
         ports:
           - 1500:3306
