@@ -34,9 +34,17 @@
     <changeSet id="master_user" author="thilinam">
         <sql>
             INSERT INTO user_data (id, name, password, Created_Time) VALUES
-            ('1f1a4a9b-7b1a-4d44-9a2a-7c6b8a7a9c2a', 'Admin', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-11 20:00:00'),
-            ('2d2b4b6a-8c2b-4c4d-9b2a-7d5b9a6a9b3a', 'User1', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-12 21:00:00'),
-            ('3c3c4c8a-9c3c-4e4f-9c3c-8e6b8c7a9c4a', 'User2', '$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-13 22:00:00');
+            ('1f1a4a9b-7b1a-4d44-9a2a-7c6b8a7a9c2a', 'Admin', '{noop}$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-11 20:00:00'),
+            ('2d2b4b6a-8c2b-4c4d-9b2a-7d5b9a6a9b3a', 'User1', '{noop}$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-12 21:00:00'),
+            ('3c3c4c8a-9c3c-4e4f-9c3c-8e6b8c7a9c4a', 'User2', '{noop}$2a$10$e8t8p8a8r8b8e8c8u8r8', '2024-01-13 22:00:00');
+        </sql>
+    </changeSet>
+
+    <changeSet id="master_user_update_records" author="thilinam">
+        <sql>
+            INSERT INTO user_data (id, name, password, Created_Time) VALUES
+            ('acf701bb-d6a5-4c66-b582-32d25bcf4975', 'admin_user', '{noop}YWRtaW5fdXNlcjphZG1pbl91c2Vy', '2024-01-11 20:00:00'),
+            ('a73172eb-da1e-4c0c-b694-adfdd4fad325', 'default_user', '{noop}ZGVmYXVsdF91c2VyOmRlZmF1bHRfdXNlcg==', '2024-01-12 21:00:00');
         </sql>
     </changeSet>
 

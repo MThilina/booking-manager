@@ -16,6 +16,15 @@
         </sql>
     </changeSet>
 
+    <changeSet id="context_user_roles_update" author="thilinam">
+        <sql>
+            INSERT INTO user_roles (id, user_id, role, Created_Time) VALUES
+            ('89419186-ee2c-4a37-8c03-99e194ab4917', 'acf701bb-d6a5-4c66-b582-32d25bcf4975', 'admin', '2024-01-14 23:00:00'),
+            ('42a97b1c-3a8b-4b99-b894-68567fdf79b7', 'a73172eb-da1e-4c0c-b694-adfdd4fad325', 'user', '2024-01-15 00:00:00');
+        </sql>
+    </changeSet>
+
+
     <!-- Changeset for inserting data into book_borrow_data table -->
     <changeSet id="context_book_borrow_data" author="thilinam">
         <sql>
