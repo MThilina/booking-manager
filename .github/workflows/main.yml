@@ -1,0 +1,42 @@
+name: Spring Boot CI/CD Pipeline for main
+
+on:
+  build:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: booking_manager
+        ports:
+          - 1500:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/booking_manager?createDatabaseIfNotExist=true
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: 1qaz@WSX3edc
+
+      - name: Run Tests
+        run: mvn test
+        env:
+          SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/booking_manager?createDatabaseIfNotExist=true
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: 1qaz@WSX3edc
