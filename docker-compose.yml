@@ -4,8 +4,8 @@ services:
     restart: always
     container_name: db_container
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: 1qaz@WSX3edc
+      MYSQL_DATABASE: booking_manager
     volumes:
       - ./mysql-data:/var/lib/mysql  # Mount the volume for database data persistence
       - ./init.sql:/docker-entrypoint-initdb.d/initdb/init.sql:ro # Ensure correct volume mapping
