@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "d58053e6-3308-405e-88dd-62d4f410d642",
+		"name": "Booking-Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All the Books in the Library",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}api/library/books",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"library",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register New Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"isbn\": \"978-3-16-148410-0\",\n        \"title\": \"Harry potter and Scecret Stone\",\n        \"author\": \"Enid Bliden\",\n        \"id\": \"1e9d55f7-bb2e-5e25-8c3b-0b5672a6f4ed\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}api/library/books",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"library",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Borrower",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":null,\n    \"name\":\"Thilina Manawadu\",\n    \"email\":\"thilinamanawadu@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}api/library/borrowers",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"library",
+						"borrowers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrow Book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}api/library/borrowers/{{borrowerId}}/books/{{bookId}}",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"library",
+						"borrowers",
+						"{{borrowerId}}",
+						"books",
+						"{{bookId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return A Borrowed Book",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{host}}api/library/borrowers/{{borrowerId}}/books/{{bookId}}",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"library",
+						"borrowers",
+						"{{borrowerId}}",
+						"books",
+						"{{bookId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin_user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin_user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}api/v1/auth/token",
+					"host": [
+						"{{host}}api"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080/"
+		},
+		{
+			"key": "borrowerId",
+			"value": "borrowerId"
+		},
+		{
+			"key": "bookId",
+			"value": "25f1ad61-1a12-46c5-9537-be1f29f67616"
+		}
+	]
+}
