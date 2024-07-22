@@ -52,11 +52,7 @@ The following are the main API endpoints available in the project:
 ### Postman Collection
 
 A Postman collection is available for testing the API endpoints. Import the `Booking-Management.postman_collection.json` file into Postman to get started.
-
-## Contribution Guidelines
-
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
-
+Postman collection can be browsed at document folder 
 ## Open API Implementation
 
 This Project contains the Open API and it can be accessed with any authentication. it can be accessed by the
