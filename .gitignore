@@ -33,3 +33,4 @@ build/
 
 # volume
 mysql-data
+init.sql
