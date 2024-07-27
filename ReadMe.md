@@ -36,7 +36,7 @@ This is a small Spring Boot simulation for a library system that incorporates al
     ```
 5. Run Project with Docker-Compose: (Go to the related folder)
    ```bash
-    docker-composer up --build
+    docker-compose up --build
    ```
 ## Usage Instructions
 
