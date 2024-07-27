@@ -39,12 +39,18 @@ jobs:
       - name: Run Tests
         run: mvn test
 
-      - name: Run Spring Boot Application
-        run: 'mvn spring-boot:run &'
+      - name: Start Spring Boot Application
+        run: |
+          nohup mvn spring-boot:run & echo $! > spring-boot.pid
 
       - name: Verify Application is Running
         run: >
-          sleep 30 # Wait for Spring Boot application to start
+          sleep 15 # Wait for Spring Boot application to start
+
+          if [ ! -f spring-boot.pid ]; then
+            echo "PID file not found"
+            exit 1
+          fi
 
           if ! curl -s http://localhost:8080/actuator/health | grep
           '"status":"UP"'; then
@@ -54,4 +60,10 @@ jobs:
 
       - name: Stop Spring Boot Application
         run: |
-          kill $(cat spring-boot.pid)
+          if [ -f spring-boot.pid ]; then
+            kill $(cat spring-boot.pid)
+            rm spring-boot.pid
+          else
+            echo "PID file not found"
+            exit 1
+          fi
