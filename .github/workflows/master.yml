@@ -54,4 +54,4 @@ jobs:
 
       - name: Stop Spring Boot Application
         run: |
-          pkill -f 'booking-management -jar'
+          kill $(cat spring-boot.pid)
